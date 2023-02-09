@@ -42,7 +42,8 @@ def fix_image(upload):
     col2.image(fixed)
     st.sidebar.markdown("\n")
     st.sidebar.download_button(
-        "Download fixed image", convert_image(fixed), "fixed.png", "image/png"
+        "Download the fixed image", convert_image(
+            fixed), "fixed.png", "image/png"
     )
 
 
@@ -104,10 +105,10 @@ def layout(*args):
 
 def footer():
     myargs = [
-        "<b>Made with ❤ by</b> ",
+        "<b>Made with :heart: by</b> ",
         link("https://www.arkhad.com/", " xJuggl3r"),
 
-        " using: Python 3.8 ",
+        " using: Python 3.10 ",
         link("https://www.python.org/", image('https://i.imgur.com/ml09ccU.png',
                                               width=px(18), height=px(18), margin="0em")),
         ", Streamlit ",
