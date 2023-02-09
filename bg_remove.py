@@ -4,6 +4,11 @@ import streamlit as st
 from PIL import Image
 from rembg import remove
 
+from htbuilder import HtmlElement, div, ul, li, br, hr, a, p, img, styles, classes, fonts
+from htbuilder.units import percent, px
+# from htbuilder.funcs import rgba, rgb
+
+
 st.set_page_config(layout="wide", page_title="Image Background Remover")
 
 st.write("## Git rid of your image's background!")
@@ -50,3 +55,68 @@ if my_upload is not None:
     fix_image(upload=my_upload)
 else:
     fix_image("./spaceman.png")
+
+
+# Footer
+def image(src_as_string, **style):
+    return img(src=src_as_string, style=styles(**style))
+
+
+def link(link, text, **style):
+    return a(_href=link, _target="_blank", style=styles(**style))(text)
+
+
+def layout(*args):
+
+    style = """
+    <style>
+      # MainMenu {visibility: hidden;}
+      footer {visibility: hidden;}
+    </style>
+    """
+
+    style_div = styles(
+        left=0,
+        bottom=0,
+        margin=px(0, 0, 0, 0),
+        width=percent(100),
+        text_align="center",
+        # height="60px",
+        # opacity=0.6
+    )
+
+    style_hr = styles(
+    )
+
+    body = p()
+    foot = div(style=style_div)(hr(style=style_hr), body)
+
+    st.markdown(style, unsafe_allow_html=True)
+
+    for arg in args:
+        if isinstance(arg, str):
+            body(arg)
+        elif isinstance(arg, HtmlElement):
+            body(arg)
+
+    st.markdown(str(foot), unsafe_allow_html=True)
+
+
+def footer():
+    myargs = [
+        "<b>Made with ❤ by</b> ",
+        link("https://www.arkhad.com/", " xJuggl3r"),
+
+        " using: Python 3.8 ",
+        link("https://www.python.org/", image('https://i.imgur.com/ml09ccU.png',
+                                              width=px(18), height=px(18), margin="0em")),
+        ", Streamlit ",
+        link("https://streamlit.io/", image('https://streamlit.io/images/brand/streamlit-mark-color.svg',
+                                            width=px(24), height=px(25), margin="0em")),
+        br(),
+    ]
+    layout(*myargs)
+
+
+if __name__ == "__main__":
+    footer()
