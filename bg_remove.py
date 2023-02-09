@@ -105,7 +105,7 @@ def layout(*args):
 
 def footer():
     myargs = [
-        "<b>Made with :heart: by</b> ",
+        "<b>Made with ❤ by</b> ",
         link("https://www.arkhad.com/", " xJuggl3r"),
 
         " using: Python 3.10 ",
